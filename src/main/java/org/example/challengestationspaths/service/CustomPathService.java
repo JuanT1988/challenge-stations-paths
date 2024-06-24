@@ -71,6 +71,10 @@ public class CustomPathService implements PathService {
      */
     @Override
     public List<Path> getAllPaths() {
+        if (dataContainer.getPaths().isEmpty()) {
+            LOGGER.warn("No paths found in memory");
+            throw new NotFoundException("No paths found in memory");
+        }
         return dataContainer.getPaths();
     }
 

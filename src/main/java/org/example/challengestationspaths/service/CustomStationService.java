@@ -22,7 +22,7 @@ public class CustomStationService implements StationService {
     @Override
     public void addStation(long stationId, String name) throws BadRequestException {
         if (dataContainer.getStationMap().containsValue(name)) {
-            LOGGER.error("Station {} already exists", name);
+            LOGGER.warn("Station {} already exists", name);
             throw new BadRequestException("Station " + name + " already exists");
         }
         dataContainer.addStation(stationId, name);
