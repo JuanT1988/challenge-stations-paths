@@ -19,6 +19,15 @@ public class CustomStationService implements StationService {
     @Autowired
     private DataContainer dataContainer;
 
+    /**
+     * Validacion de existencia de la estacion ingresada,
+     * de lo contrario se permite tanto la actualizacion
+     * como el agregado de la nueva estacion.
+     *
+     * @param stationId
+     * @param name
+     * @throws BadRequestException
+     */
     @Override
     public void addStation(long stationId, String name) throws BadRequestException {
         if (dataContainer.getStationMap().containsValue(name)) {
@@ -28,6 +37,12 @@ public class CustomStationService implements StationService {
         dataContainer.addStation(stationId, name);
     }
 
+    /**
+     * Para consultar lo que se ingreso en memoria.
+     *
+     * @return
+     * @throws NotFoundException
+     */
     @Override
     public List<Station> getAllStations() throws NotFoundException {
         if (dataContainer.getStations().isEmpty()) {
