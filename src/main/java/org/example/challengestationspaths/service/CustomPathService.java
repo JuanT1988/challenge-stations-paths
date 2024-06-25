@@ -89,12 +89,18 @@ public class CustomPathService implements PathService {
         if (sourceId == destinationId) {
             LOGGER.warn("Source {} and destination {} cannot both be the same", sourceId, destinationId);
             throw new BadRequestException("Source " + sourceId + " and Destination " + destinationId + " cannot both be the same");
-        } else if (!dataContainer.getStationMap().containsKey(sourceId)) {
+        }
+        String message = null;
+        if (!dataContainer.getStationMap().containsKey(sourceId)) {
             LOGGER.warn("Source {} does not exist", sourceId);
-            throw new BadRequestException("Source " + sourceId + " does not exist");
-        } else if (!dataContainer.getStationMap().containsKey(destinationId)) {
+            message = "Source " + sourceId + " does not exist";
+        }
+        if (!dataContainer.getStationMap().containsKey(destinationId)) {
             LOGGER.warn("Destination {} does not exist", destinationId);
-            throw new BadRequestException("Destination " + destinationId + " does not exist");       
+            message = (message != null ? message + " and " : "") + "Destination " + destinationId + " does not exist";
+        }
+        if (message != null) {
+            throw new BadRequestException(message);
         }
     }
 
