@@ -25,6 +25,12 @@ public class DataContainer {
         return stationMap;
     }
 
+    /**
+     * Se valida si se realiza una actualizacion del nombre de la estacion o si es una estacion nueva.
+     *
+     * @param stationId
+     * @param name
+     */
     public void addStation(long stationId, String name) {
         boolean insert = true;
         for (int i = 0; i < stations.size(); i++) {
@@ -39,6 +45,11 @@ public class DataContainer {
         }
     }
 
+    /**
+     * Se valida si el path ingresado debe ser actualizado o si se crea uno nuevo.
+     *
+     * @param path
+     */
     public void addPath(Path path) {
         boolean insert = true;
         for (Path p : paths) {
@@ -52,6 +63,13 @@ public class DataContainer {
         }
     }
 
+    /**
+     * Consulta en la lista de paths por un sourceId y destinationId para obtener un path.
+     *
+     * @param sourceId
+     * @param destinationId
+     * @return
+     */
     public Path getPathByStationIds(long sourceId, long destinationId) {
         for (Path path : paths) {
             if ((path.getSourceId() == sourceId && path.getDestinationId() == destinationId)
@@ -62,6 +80,14 @@ public class DataContainer {
         return null;
     }
 
+    /**
+     * Consulta todas las estaciones disponibles en los paths,
+     * poniendo como primer stationId la que es ingresada
+     * como sourceId en la consulta de camino optimo.
+     *
+     * @param sourceStationId
+     * @return
+     */
     public List<Long> getStationsByPaths(long sourceStationId) {
         List<Long> stationIds = new ArrayList<>();
         stationIds.add(sourceStationId);
