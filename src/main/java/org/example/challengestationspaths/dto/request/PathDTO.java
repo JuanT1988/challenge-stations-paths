@@ -19,6 +19,9 @@ public class PathDTO implements Serializable {
     @JsonProperty("destination_id")
     private long destinationId;
 
+    public PathDTO() {
+    }
+
     public PathDTO(long sourceId, long destinationId, double cost) {
         this.sourceId = sourceId;
         this.destinationId = destinationId;
